@@ -25,7 +25,7 @@ library(beepr)
 set.seed(123456)
 
 #Loading dataset of Toxoplasma PCR
-inhtox<-read.csv(file="E:/inhib/data R/ToxoLC_R.csv",sep=";",header=T,dec=".")
+inhtox<-read.csv(file="?";",header=T,dec=".")
 
 
 #Cleaning and tidying the dataset of Toxoplasma PCR
@@ -183,7 +183,7 @@ dplyr::union(nd,dsd) %>% full_join(ddd,by="SampleName_m")-> inhtox4
 
 
 #Loading dataset of bioclinical informations for PCR T gondii results
-dxtox<-read.csv(file="E:/inhib/data R/ToxoDxLab_R.csv",sep=";",header=T,dec=".")
+dxtox<-read.csv(file="?",sep=";",header=T,dec=".")
 
 #Cleaning, tidying the dataset of bioclinical informations for PCR T gondii results
 #and creating a column "SampleName_m" for fusion with dataset of Toxoplasma PCR
@@ -196,7 +196,7 @@ dxtox %>% unite(Date_creation,Date_creation,Heure_creation,sep=" ") %>%
   transform(SampleName_m=as.character(SampleName_m))-> dxtox
 
 #Joining the datasets and removing sporadic misapparing
-#If we perform full_join, PCR saved in DXLab but not performed owing to "non conformités" are included "toxo" dataset
+#If we perform full_join, PCR saved in DXLab but not performed owing to "non conformitÃ©s" are included "toxo" dataset
 dplyr::left_join(inhtox4,dxtox,by="SampleName_m") %>%
   mutate(fusion=paste(SampleName.x,Matrix,sep="_")) %>%
   filter(fusion!="349 3365LA_Placenta" & fusion!="3 493 365_Liquide amniotique") %>%
@@ -233,7 +233,7 @@ l<- c("Position_A.x",
 toxo[k][is.na(toxo[k])& !is.na(toxo[l])] <- 55
 
 #Loading full blood counts
-fbctox<-read.csv(file="E:/inhib/data R/toxo_FBC_DxLab_R.csv",sep=";",header=T,dec=".")
+fbctox<-read.csv(file="?",sep=";",header=T,dec=".")
 
 #Creating a column for merging dataframes
 fbctox %>%
@@ -594,16 +594,16 @@ toxo %>%
 toxo %>%
   filter(!is.na(Matrix)) %>%
   mutate(gglion=ifelse(str_detect(Info_patient,"ganglionnaire")|
-                         str_detect(Info_patient,"adénopathie"),1,0),
-         retine=ifelse(str_detect(Info_patient,"rétinienne"),1,0),
-         cereb=ifelse(str_detect(Info_patient,"cérébra"),1,0),
-         hepat=ifelse(str_detect(Info_patient,"hépatique"),1,0),
-         card=ifelse(str_detect(Info_patient,"péricardique"),1,0),
+                         str_detect(Info_patient,"adÃ©nopathie"),1,0),
+         retine=ifelse(str_detect(Info_patient,"rÃ©tinienne"),1,0),
+         cereb=ifelse(str_detect(Info_patient,"cÃ©rÃ©bra"),1,0),
+         hepat=ifelse(str_detect(Info_patient,"hÃ©patique"),1,0),
+         card=ifelse(str_detect(Info_patient,"pÃ©ricardique"),1,0),
          pleural=ifelse(str_detect(Info_patient,"pleural"),1,0),
          mo=ifelse(str_detect(Info_patient,"Moelle osseuse"),1,0),
          la=ifelse(str_detect(Matrix,"Liquide amniotique"),1,0),
          lcr=ifelse(str_detect(Matrix,"LCR"),1,0),
-         lba=ifelse(str_detect(Matrix,"bronchiolo-alvéolaire"),1,0),
+         lba=ifelse(str_detect(Matrix,"bronchiolo-alvÃ©olaire"),1,0),
          placenta=ifelse(str_detect(Matrix,"Placenta"),1,0),
          ascite=ifelse(str_detect(Info_patient,"ascite"),1,0),
          cordon=ifelse(str_detect(Matrix,"cordon"),1,0),
@@ -635,16 +635,16 @@ toxo %>%
 toxo %>%
   filter(!is.na(Matrix)) %>%
   mutate(gglion=ifelse(str_detect(Info_patient,"ganglionnaire")|
-                         str_detect(Info_patient,"adénopathie"),1,0),
-         retine=ifelse(str_detect(Info_patient,"rétinienne"),1,0),
-         cereb=ifelse(str_detect(Info_patient,"cérébra"),1,0),
-         hepat=ifelse(str_detect(Info_patient,"hépatique"),1,0),
-         card=ifelse(str_detect(Info_patient,"péricardique"),1,0),
+                         str_detect(Info_patient,"adÃ©nopathie"),1,0),
+         retine=ifelse(str_detect(Info_patient,"rÃ©tinienne"),1,0),
+         cereb=ifelse(str_detect(Info_patient,"cÃ©rÃ©bra"),1,0),
+         hepat=ifelse(str_detect(Info_patient,"hÃ©patique"),1,0),
+         card=ifelse(str_detect(Info_patient,"pÃ©ricardique"),1,0),
          pleural=ifelse(str_detect(Info_patient,"pleural"),1,0),
          mo=ifelse(str_detect(Info_patient,"Moelle osseuse"),1,0),
          la=ifelse(str_detect(Matrix,"Liquide amniotique"),1,0),
          lcr=ifelse(str_detect(Matrix,"LCR"),1,0),
-         lba=ifelse(str_detect(Matrix,"bronchiolo-alvéolaire"),1,0),
+         lba=ifelse(str_detect(Matrix,"bronchiolo-alvÃ©olaire"),1,0),
          placenta=ifelse(str_detect(Matrix,"Placenta"),1,0),
          ascite=ifelse(str_detect(Info_patient,"ascite"),1,0),
          cordon=ifelse(str_detect(Matrix,"cordon"),1,0),
@@ -685,8 +685,8 @@ toxo %>%
 toxo %>%
   filter(!is.na(Matrix)) %>%
   filter(str_detect(Info_patient,"ganglionnaire")|
-           str_detect(Info_patient,"adénopathie")) %>%
-  mutate(Pos_result= ifelse(str_detect(Conclusion,"Présence"),1,0),
+           str_detect(Info_patient,"adÃ©nopathie")) %>%
+  mutate(Pos_result= ifelse(str_detect(Conclusion,"PrÃ©sence"),1,0),
          Neg_result= ifelse(str_detect(Conclusion,"Absence"),1,0)) %>%
   summarise(Matrix="lymph node",
             N_pos=sum(Pos_result),
@@ -695,8 +695,8 @@ toxo %>%
 
 toxo %>%
   filter(!is.na(Matrix)) %>%
-  filter(str_detect(Info_patient,"rétinienne")) %>%
-  mutate(Pos_result= ifelse(str_detect(Conclusion,"Présence"),1,0),
+  filter(str_detect(Info_patient,"rÃ©tinienne")) %>%
+  mutate(Pos_result= ifelse(str_detect(Conclusion,"PrÃ©sence"),1,0),
          Neg_result= ifelse(str_detect(Conclusion,"Absence"),1,0)) %>%
   summarise(Matrix="retina",
             N_pos=sum(Pos_result),
@@ -705,8 +705,8 @@ toxo %>%
 bind_rows(t01,t02) -> t01
 toxo %>%
   filter(!is.na(Matrix)) %>%
-  filter(str_detect(Info_patient,"cérébra")) %>%
-  mutate(Pos_result= ifelse(str_detect(Conclusion,"Présence"),1,0),
+  filter(str_detect(Info_patient,"cÃ©rÃ©bra")) %>%
+  mutate(Pos_result= ifelse(str_detect(Conclusion,"PrÃ©sence"),1,0),
          Neg_result= ifelse(str_detect(Conclusion,"Absence"),1,0)) %>%
   summarise(Matrix="cerebral biopsy",
             N_pos=sum(Pos_result),
@@ -715,8 +715,8 @@ toxo %>%
 bind_rows(t01,t02) -> t01
 toxo %>%
   filter(!is.na(Matrix)) %>%
-  filter(str_detect(Info_patient,"hépatique")) %>%
-  mutate(Pos_result= ifelse(str_detect(Conclusion,"Présence"),1,0),
+  filter(str_detect(Info_patient,"hÃ©patique")) %>%
+  mutate(Pos_result= ifelse(str_detect(Conclusion,"PrÃ©sence"),1,0),
          Neg_result= ifelse(str_detect(Conclusion,"Absence"),1,0)) %>%
   summarise(Matrix="liver biopsy",
             N_pos=sum(Pos_result),
@@ -725,8 +725,8 @@ toxo %>%
 bind_rows(t01,t02) -> t01
 toxo %>%
   filter(!is.na(Matrix)) %>%
-  filter(str_detect(Info_patient,"péricardique")) %>%
-  mutate(Pos_result= ifelse(str_detect(Conclusion,"Présence"),1,0),
+  filter(str_detect(Info_patient,"pÃ©ricardique")) %>%
+  mutate(Pos_result= ifelse(str_detect(Conclusion,"PrÃ©sence"),1,0),
          Neg_result= ifelse(str_detect(Conclusion,"Absence"),1,0)) %>%
   summarise(Matrix="heart biopsy",
             N_pos=sum(Pos_result),
@@ -736,7 +736,7 @@ bind_rows(t01,t02) -> t01
 toxo %>%
   filter(!is.na(Matrix)) %>%
   filter(str_detect(Info_patient,"pleural")) %>%
-  mutate(Pos_result= ifelse(str_detect(Conclusion,"Présence"),1,0),
+  mutate(Pos_result= ifelse(str_detect(Conclusion,"PrÃ©sence"),1,0),
          Neg_result= ifelse(str_detect(Conclusion,"Absence"),1,0)) %>%
   summarise(Matrix="pleural fuid",
             N_pos=sum(Pos_result),
@@ -746,7 +746,7 @@ bind_rows(t01,t02) -> t01
 toxo %>%
   filter(!is.na(Matrix)) %>%
   filter(str_detect(Info_patient,"Moelle osseuse")) %>%
-  mutate(Pos_result= ifelse(str_detect(Conclusion,"Présence"),1,0),
+  mutate(Pos_result= ifelse(str_detect(Conclusion,"PrÃ©sence"),1,0),
          Neg_result= ifelse(str_detect(Conclusion,"Absence"),1,0)) %>%
   summarise(Matrix="bone marrow",
             N_pos=sum(Pos_result),
@@ -756,7 +756,7 @@ bind_rows(t01,t02) -> t01
 toxo %>%
   filter(!is.na(Matrix)) %>%
   filter(str_detect(Matrix,"Liquide amniotique")) %>% 
-  mutate(Pos_result= ifelse(str_detect(Conclusion,"Présence"),1,0),
+  mutate(Pos_result= ifelse(str_detect(Conclusion,"PrÃ©sence"),1,0),
          Neg_result= ifelse(str_detect(Conclusion,"Absence"),1,0)) %>%
   summarise(Matrix="AF",
             N_pos=sum(Pos_result),
@@ -767,7 +767,7 @@ toxo %>%
   filter(!is.na(Matrix)) %>%
   filter(str_detect(Matrix,"LCR")|
            str_detect(Info_patient,"LCR")) %>% 
-  mutate(Pos_result= ifelse(str_detect(Conclusion,"Présence"),1,0),
+  mutate(Pos_result= ifelse(str_detect(Conclusion,"PrÃ©sence"),1,0),
          Neg_result= ifelse(str_detect(Conclusion,"Absence"),1,0)) %>%
   summarise(Matrix="CSF",
             N_pos=sum(Pos_result),
@@ -776,8 +776,8 @@ toxo %>%
 bind_rows(t01,t02) -> t01
 toxo %>%
   filter(!is.na(Matrix)) %>%
-  filter(str_detect(Matrix,"bronchiolo-alvéolaire")) %>%
-  mutate(Pos_result= ifelse(str_detect(Conclusion,"Présence"),1,0),
+  filter(str_detect(Matrix,"bronchiolo-alvÃ©olaire")) %>%
+  mutate(Pos_result= ifelse(str_detect(Conclusion,"PrÃ©sence"),1,0),
          Neg_result= ifelse(str_detect(Conclusion,"Absence"),1,0)) %>%
   summarise(Matrix="BAL",
             N_pos=sum(Pos_result),
@@ -787,7 +787,7 @@ bind_rows(t01,t02) -> t01
 toxo %>%
   filter(!is.na(Matrix)) %>%
   filter(str_detect(Matrix,"Placenta")) %>%
-  mutate(Pos_result= ifelse(str_detect(Conclusion,"Présence"),1,0),
+  mutate(Pos_result= ifelse(str_detect(Conclusion,"PrÃ©sence"),1,0),
          Neg_result= ifelse(str_detect(Conclusion,"Absence"),1,0)) %>%
   summarise(Matrix="placenta",
             N_pos=sum(Pos_result),
@@ -797,7 +797,7 @@ bind_rows(t01,t02) -> t01
 toxo %>%
   filter(!is.na(Matrix)) %>%
   filter(str_detect(Info_patient,"ascite")) %>%
-  mutate(Pos_result= ifelse(str_detect(Conclusion,"Présence"),1,0),
+  mutate(Pos_result= ifelse(str_detect(Conclusion,"PrÃ©sence"),1,0),
          Neg_result= ifelse(str_detect(Conclusion,"Absence"),1,0)) %>%
   summarise(Matrix="ascites",
             N_pos=sum(Pos_result),
@@ -807,7 +807,7 @@ bind_rows(t01,t02) -> t01
 toxo %>%
   filter(!is.na(Matrix)) %>%
   filter(str_detect(Matrix,"cordon")) %>%
-  mutate(Pos_result= ifelse(str_detect(Conclusion,"Présence de toxoplasmes dans le placenta et le sang") ,1,0)) %>%
+  mutate(Pos_result= ifelse(str_detect(Conclusion,"PrÃ©sence de toxoplasmes dans le placenta et le sang") ,1,0)) %>%
   summarise(Matrix="cord blood",
             N_pos=sum(Pos_result),
             N=n(),
@@ -818,7 +818,7 @@ toxo %>%
   filter(str_detect(Matrix,"Sang veineux")&
            Info_patient %in% c("N/A","Humeur aqueuse") &
            SampleName.x!= "153 0868 HA") %>%
-  mutate(Pos_result= ifelse(str_detect(Conclusion,"Présence"),1,0),
+  mutate(Pos_result= ifelse(str_detect(Conclusion,"PrÃ©sence"),1,0),
          Neg_result= ifelse(str_detect(Conclusion,"Absence"),1,0)) %>%
   summarise(Matrix="blood",
             N_pos=sum(Pos_result),
@@ -828,9 +828,9 @@ bind_rows(t01,t02) -> t01
 toxo %>%
   filter(!is.na(Matrix)) %>%
   filter(str_detect(Matrix,"Humeur aqueuse") &
-           Info_patient!="Liquide céphalo-rachidien (LCR)"|
+           Info_patient!="Liquide cÃ©phalo-rachidien (LCR)"|
            SampleName.x== "153 0868 HA") %>% 
-  mutate(Pos_result= ifelse(str_detect(Conclusion,"Présence"),1,0),
+  mutate(Pos_result= ifelse(str_detect(Conclusion,"PrÃ©sence"),1,0),
          Neg_result= ifelse(str_detect(Conclusion,"Absence"),1,0)) %>%
   summarise(Matrix="Aqueous humor",
             N_pos=sum(Pos_result),
@@ -853,7 +853,7 @@ bind_rows(t01,t02)%>% kable(digits=2)
 #Selection of blood samples and classification as paucicellular or not
 #Blood samples with associated full blood count
 #Loading full blood counts
-fbctox<-read.csv(file="E:/inhib/data R/toxo_FBC_DxLab_R.csv",sep=";",header=T,dec=".")
+fbctox<-read.csv(file="?",sep=";",header=T,dec=".")
 
 #Creating a column for merging dataframes
 fbctox %>%
@@ -879,7 +879,7 @@ toxo %>%
 
 #Blood samples without WBC
 #Loading classification as paucicellular or not
-cyt_man<-read.csv(file="E:/inhib/PCR toxo sans cytologies associees (1).csv",sep=";",header=T,dec=".")
+cyt_man<-read.csv(file="?",sep=";",header=T,dec=".")
 
 #Selection, merging and classification as paucicellular
 toxo %>%
@@ -899,7 +899,7 @@ bind_rows(tg_fbc,tg_bld) -> toxo_p
 
 #Creation of a summarising table
 toxo_p %>%
-   mutate(Pos_result= ifelse(str_detect(Conclusion,"Présence"),1,0),
+   mutate(Pos_result= ifelse(str_detect(Conclusion,"PrÃ©sence"),1,0),
          Neg_result= ifelse(str_detect(Conclusion,"Absence"),1,0)) %>% 
   distinct() %>%
   group_by(pauci) %>%
@@ -920,7 +920,7 @@ nor failed extraction.
 toxo %>%
   filter(!is.na(Matrix) & CrossingPoint_H.x <45) %>%
   filter(str_detect(Info_patient,"ganglionnaire")|
-           str_detect(Info_patient,"adénopathie")) %>%
+           str_detect(Info_patient,"adÃ©nopathie")) %>%
   summarise(Matrix="lymph node",
             N=n(),
             `Mean Cp alb`=mean(CrossingPoint_H.x),
@@ -931,7 +931,7 @@ toxo %>%
 
 toxo %>%
   filter(!is.na(Matrix) & CrossingPoint_H.x <45) %>%
-  filter(str_detect(Info_patient,"rétinienne")) %>%
+  filter(str_detect(Info_patient,"rÃ©tinienne")) %>%
   summarise(Matrix="retina",
             N=n(),
             `Mean Cp alb`=mean(CrossingPoint_H.x),
@@ -942,7 +942,7 @@ toxo %>%
 bind_rows(t01,t02) -> t01
 toxo %>%
   filter(!is.na(Matrix) & CrossingPoint_H.x <45) %>%
-  filter(str_detect(Info_patient,"cérébra")) %>%
+  filter(str_detect(Info_patient,"cÃ©rÃ©bra")) %>%
   summarise(Matrix="cerebral biospy",
             N=n(),
             `Mean Cp alb`=mean(CrossingPoint_H.x),
@@ -953,7 +953,7 @@ toxo %>%
 bind_rows(t01,t02) -> t01
 toxo %>%
   filter(!is.na(Matrix) & CrossingPoint_H.x <45) %>%
-  filter(str_detect(Info_patient,"hépatique")) %>%
+  filter(str_detect(Info_patient,"hÃ©patique")) %>%
   summarise(Matrix="liver biospy",
             N=n(),
             `Mean Cp alb`=mean(CrossingPoint_H.x),
@@ -964,7 +964,7 @@ toxo %>%
 bind_rows(t01,t02) -> t01
 toxo %>%
   filter(!is.na(Matrix) & CrossingPoint_H.x <45) %>%
-  filter(str_detect(Info_patient,"péricardique")) %>%
+  filter(str_detect(Info_patient,"pÃ©ricardique")) %>%
   summarise(Matrix="heart biospy",
             N=n(),
             `Mean Cp alb`=mean(CrossingPoint_H.x),
@@ -1020,7 +1020,7 @@ toxo %>%
 bind_rows(t01,t02) -> t01
 toxo %>%
   filter(!is.na(Matrix) & CrossingPoint_H.x <45) %>%
-  filter(str_detect(Matrix,"bronchiolo-alvéolaire")) %>%
+  filter(str_detect(Matrix,"bronchiolo-alvÃ©olaire")) %>%
   summarise(Matrix="BAL",
             N=n(),
             `Mean Cp alb`=mean(CrossingPoint_H.x),
@@ -1078,7 +1078,7 @@ bind_rows(t01,t02) -> t01
 toxo %>%
   filter(!is.na(Matrix) & CrossingPoint_H.x <45) %>%
   filter(str_detect(Matrix,"Humeur aqueuse") &
-           Info_patient!="Liquide céphalo-rachidien (LCR)"|
+           Info_patient!="Liquide cÃ©phalo-rachidien (LCR)"|
           SampleName.x== "153 0868 HA") %>% 
   summarise(Matrix="Aqueous humor",
             N=n(),
@@ -1105,10 +1105,10 @@ ascites, bone marrow.
 toxo %>%
   mutate (pauci=ifelse
           (Matrix %in% c("Liquide amniotique",
-                         "Liquide céphalo-rachidien (LCR)",
+                         "Liquide cÃ©phalo-rachidien (LCR)",
                          "Humeur aqueuse")|
               Info_patient %in% c("Liquide d'ascite",
-                                  "Liquide péricardique",
+                                  "Liquide pÃ©ricardique",
                                   "Liquide pleural")|
               Num_travail %in% c(99163222723,99162523175,
                                  99162503057,99161381971,99160961446)| 
@@ -1119,7 +1119,7 @@ toxo %>%
 #Selection of blood samples and classification as paucicellular or not
 #Blood samples with associated full blood count
 #Loading full blood counts
-fbctox<-read.csv(file="E:/inhib/data R/toxo_FBC_DxLab_R.csv",sep=";",header=T,dec=".")
+fbctox<-read.csv(file="?",sep=";",header=T,dec=".")
 
 #Creating a column for merging dataframes
 fbctox %>%
@@ -1143,7 +1143,7 @@ toxo %>%
 
 #Blood samples without WBC
 #Loading classification as paucicellular or not
-cyt_man<-read.csv(file="E:/inhib/PCR toxo sans cytologies associees (1).csv",sep=";",header=T,dec=".")
+cyt_man<-read.csv(file="?",sep=";",header=T,dec=".")
 
 #Selection, merging and classification as paucicellular
 toxo %>%
@@ -1177,7 +1177,7 @@ toxo_p %>%
 toxo_p %>%
   filter(!is.na(Matrix) & CrossingPoint_H.x<45) %>%
   filter(str_detect(Info_patient,"ganglionnaire")|
-           str_detect(Info_patient,"adénopathie")) %>%
+           str_detect(Info_patient,"adÃ©nopathie")) %>%
   group_by(pauci) %>%
   summarise(Matrix="lymph node",
             N=n(),
@@ -1189,7 +1189,7 @@ toxo_p %>%
 bind_rows(t01,t02) -> t01
 toxo_p %>%
   filter(!is.na(Matrix) & CrossingPoint_H.x<45) %>%
-  filter(str_detect(Info_patient,"rétinienne")) %>%
+  filter(str_detect(Info_patient,"rÃ©tinienne")) %>%
   group_by(pauci) %>%
   summarise(Matrix="retina",
             N=n(),
@@ -1201,7 +1201,7 @@ toxo_p %>%
 bind_rows(t01,t02) -> t01
 toxo_p %>%
   filter(!is.na(Matrix) & CrossingPoint_H.x<45) %>%
-  filter(str_detect(Info_patient,"cérébra")) %>%
+  filter(str_detect(Info_patient,"cÃ©rÃ©bra")) %>%
   group_by(pauci) %>%
   summarise(Matrix="cerebral biospy",
             N=n(),
@@ -1213,7 +1213,7 @@ toxo_p %>%
 bind_rows(t01,t02) -> t01
 toxo_p %>%
   filter(!is.na(Matrix) & CrossingPoint_H.x<45) %>%
-  filter(str_detect(Info_patient,"hépatique")) %>%
+  filter(str_detect(Info_patient,"hÃ©patique")) %>%
   group_by(pauci) %>%
   summarise(Matrix="liver biospy",
             N=n(),
@@ -1225,7 +1225,7 @@ toxo_p %>%
 bind_rows(t01,t02) -> t01
 toxo_p %>%
   filter(!is.na(Matrix) & CrossingPoint_H.x<45) %>%
-  filter(str_detect(Info_patient,"péricardique")) %>%
+  filter(str_detect(Info_patient,"pÃ©ricardique")) %>%
   group_by(pauci) %>%
   summarise(Matrix="heart biospy",
             N=n(),
@@ -1286,7 +1286,7 @@ toxo_p %>%
 bind_rows(t01,t02) -> t01
 toxo_p %>%
   filter(!is.na(Matrix) & CrossingPoint_H.x<45) %>%
-  filter(str_detect(Matrix,"bronchiolo-alvéolaire")) %>%
+  filter(str_detect(Matrix,"bronchiolo-alvÃ©olaire")) %>%
   group_by(pauci) %>%
   summarise(Matrix="BAL",
             N=n(),
@@ -1349,7 +1349,7 @@ bind_rows(t01,t02) -> t01
 toxo_p %>%
   filter(!is.na(Matrix) & CrossingPoint_H.x<45) %>%
   filter(str_detect(Matrix,"Humeur aqueuse") &
-           Info_patient!="Liquide céphalo-rachidien (LCR)"|
+           Info_patient!="Liquide cÃ©phalo-rachidien (LCR)"|
            SampleName.x== "153 0868 HA") %>%
   group_by(pauci) %>%
   summarise(Matrix="Aqueous humor",
@@ -1664,16 +1664,16 @@ toxo %>%
   filter(!is.na(Experiment.Name.y)& Experiment.Name.x!="160721" & !SampleName_m %in% c("830627","2560683","2992839"))  %>%
   filter(!is.na(Matrix)) %>%
   mutate(gglion=ifelse(str_detect(Info_patient,"ganglionnaire")|
-                         str_detect(Info_patient,"adénopathie"),1,0),
-         retine=ifelse(str_detect(Info_patient,"rétinienne"),1,0),
-         cereb=ifelse(str_detect(Info_patient,"cérébral"),1,0),
-         hepat=ifelse(str_detect(Info_patient,"hépatique"),1,0),
-         card=ifelse(str_detect(Info_patient,"péricardique"),1,0),
+                         str_detect(Info_patient,"adÃ©nopathie"),1,0),
+         retine=ifelse(str_detect(Info_patient,"rÃ©tinienne"),1,0),
+         cereb=ifelse(str_detect(Info_patient,"cÃ©rÃ©bral"),1,0),
+         hepat=ifelse(str_detect(Info_patient,"hÃ©patique"),1,0),
+         card=ifelse(str_detect(Info_patient,"pÃ©ricardique"),1,0),
          pleural=ifelse(str_detect(Info_patient,"pleural"),1,0),
          mo=ifelse(str_detect(Info_patient,"moelle osseuse"),1,0),
          la=ifelse(str_detect(Matrix,"Liquide amniotique"),1,0),
          lcr=ifelse(str_detect(Matrix,"LCR"),1,0),
-         lba=ifelse(str_detect(Matrix,"bronchiolo-alvéolaire"),1,0),
+         lba=ifelse(str_detect(Matrix,"bronchiolo-alvÃ©olaire"),1,0),
          placenta=ifelse(str_detect(Matrix,"Placenta"),1,0),
          ascite=ifelse(str_detect(Info_patient,"ascite"),1,0),
          cordon=ifelse(str_detect(Matrix,"cordon") &
@@ -1705,16 +1705,16 @@ toxo %>%
   filter(!is.na(Experiment.Name.y)& Experiment.Name.x!="160721" & !SampleName_m %in% c("830627","2560683","2992839")) %>%
   filter(!is.na(Matrix)) %>%
   mutate(gglion=ifelse(str_detect(Info_patient,"ganglionnaire")|
-                         str_detect(Info_patient,"adénopathie"),1,0),
-         retine=ifelse(str_detect(Info_patient,"rétinienne"),1,0),
-         cereb=ifelse(str_detect(Info_patient,"cérébral"),1,0),
-         hepat=ifelse(str_detect(Info_patient,"hépatique"),1,0),
-         card=ifelse(str_detect(Info_patient,"péricardique"),1,0),
+                         str_detect(Info_patient,"adÃ©nopathie"),1,0),
+         retine=ifelse(str_detect(Info_patient,"rÃ©tinienne"),1,0),
+         cereb=ifelse(str_detect(Info_patient,"cÃ©rÃ©bral"),1,0),
+         hepat=ifelse(str_detect(Info_patient,"hÃ©patique"),1,0),
+         card=ifelse(str_detect(Info_patient,"pÃ©ricardique"),1,0),
          pleural=ifelse(str_detect(Info_patient,"pleural"),1,0),
          mo=ifelse(str_detect(Info_patient,"moelle osseuse"),1,0),
          la=ifelse(str_detect(Matrix,"Liquide amniotique"),1,0),
          lcr=ifelse(str_detect(Matrix,"LCR"),1,0),
-         lba=ifelse(str_detect(Matrix,"bronchiolo-alvéolaire"),1,0),
+         lba=ifelse(str_detect(Matrix,"bronchiolo-alvÃ©olaire"),1,0),
          placenta=ifelse(str_detect(Matrix,"Placenta"),1,0),
          ascite=ifelse(str_detect(Info_patient,"ascite"),1,0),
          cordon=ifelse(str_detect(Matrix,"cordon") &
@@ -1784,16 +1784,16 @@ toxo %>%
   filter(Experiment.Name.x!="160721" & !is.na(PlateName.y) &
         !SampleName_m %in% c(830627,2560683,2992839)) %>%
   mutate(gglion=ifelse(str_detect(Info_patient,"ganglionnaire")|
-                         str_detect(Info_patient,"adénopathie"),"LN",""),
-         retine=ifelse(str_detect(Info_patient,"rétinienne"),"retina",""),
-         cereb=ifelse(str_detect(Info_patient,"cérébra"),"Cen",""),
-         hepat=ifelse(str_detect(Info_patient,"hépatique"),"HeB",""),
-         card=ifelse(str_detect(Info_patient,"péricardique"),"CaB",""),
+                         str_detect(Info_patient,"adÃ©nopathie"),"LN",""),
+         retine=ifelse(str_detect(Info_patient,"rÃ©tinienne"),"retina",""),
+         cereb=ifelse(str_detect(Info_patient,"cÃ©rÃ©bra"),"Cen",""),
+         hepat=ifelse(str_detect(Info_patient,"hÃ©patique"),"HeB",""),
+         card=ifelse(str_detect(Info_patient,"pÃ©ricardique"),"CaB",""),
          pleural=ifelse(str_detect(Info_patient,"pleural"),"pleural",""),
          mo=ifelse(str_detect(Info_patient,"Moelle osseuse"),"BM",""),
          la=ifelse(str_detect(Matrix,"Liquide amniotique"),"AF",""),
          lcr=ifelse(str_detect(Matrix,"LCR"),"lcr",""),
-         lba=ifelse(str_detect(Matrix,"bronchiolo-alvéolaire"),"BAL",""),
+         lba=ifelse(str_detect(Matrix,"bronchiolo-alvÃ©olaire"),"BAL",""),
          placenta=ifelse(str_detect(Matrix,"Placenta"),"placenta",""),
          ascite=ifelse(str_detect(Info_patient,"ascite"),"ascite",""),
          cordon=ifelse(str_detect(Matrix,"cordon"),"CB",""),
@@ -1835,16 +1835,16 @@ Inhibited samples were defined by two inhibition control Cp over 38.
 toxo %>%
   filter(!is.na(Matrix)) %>%
   mutate(gglion=ifelse(str_detect(Info_patient,"ganglionnaire")|
-                         str_detect(Info_patient,"adénopathie"),1,0),
-         retine=ifelse(str_detect(Info_patient,"rétinienne"),1,0),
-         cereb=ifelse(str_detect(Info_patient,"cérébra"),1,0),
-         hepat=ifelse(str_detect(Info_patient,"hépatique"),1,0),
-         card=ifelse(str_detect(Info_patient,"péricardique"),1,0),
+                         str_detect(Info_patient,"adÃ©nopathie"),1,0),
+         retine=ifelse(str_detect(Info_patient,"rÃ©tinienne"),1,0),
+         cereb=ifelse(str_detect(Info_patient,"cÃ©rÃ©bra"),1,0),
+         hepat=ifelse(str_detect(Info_patient,"hÃ©patique"),1,0),
+         card=ifelse(str_detect(Info_patient,"pÃ©ricardique"),1,0),
          pleural=ifelse(str_detect(Info_patient,"pleural"),1,0),
          mo=ifelse(str_detect(Info_patient,"Moelle osseuse"),1,0),
          la=ifelse(str_detect(Matrix,"Liquide amniotique"),1,0),
          lcr=ifelse(str_detect(Matrix,"LCR"),1,0),
-         lba=ifelse(str_detect(Matrix,"bronchiolo-alvéolaire"),1,0),
+         lba=ifelse(str_detect(Matrix,"bronchiolo-alvÃ©olaire"),1,0),
          placenta=ifelse(str_detect(Matrix,"Placenta"),1,0),
          ascite=ifelse(str_detect(Info_patient,"ascite"),1,0),
          cordon=ifelse(str_detect(Matrix,"cordon"),1,0),
@@ -2501,7 +2501,7 @@ toxo %>%
 
 #Blood samples without WBC
 #Loading classification as paucicellular or not
-cyt_man<-read.csv(file="E:/inhib/PCR toxo sans cytologies associees (1).csv",sep=";",header=T,dec=".")
+cyt_man<-read.csv(file="?",sep=";",header=T,dec=".")
 
 #Selection, merging and classification as paucicellular
 toxo %>%
@@ -2665,7 +2665,7 @@ toxo %>%
 
 #Blood samples without WBC
 #Loading classification as paucicellular or not
-cyt_man<-read.csv(file="E:/inhib/PCR toxo sans cytologies associees (1).csv",sep=";",header=T,dec=".")
+cyt_man<-read.csv(file="?",sep=";",header=T,dec=".")
 
 #Selection, merging and classification as paucicellular
 toxo %>%
@@ -3056,8 +3056,8 @@ bind_rows(sen,spe) %>%
 
 ```{r tg-csf}
 tgy<-function(Ct) {toxo %>%
-    filter(Matrix=="Liquide céphalo-rachidien (LCR)" | 
-           Info_patient=="Liquide céphalo-rachidien (LCR)") %>%
+    filter(Matrix=="Liquide cÃ©phalo-rachidien (LCR)" | 
+           Info_patient=="Liquide cÃ©phalo-rachidien (LCR)") %>%
     mutate(IC=ifelse(CrossingPoint_F.x>38 & CrossingPoint_G.x>38,"inh","ok"),
            albu28=ifelse(CrossingPoint_H.x>=Ct,"inh","ok"))%>%
     mutate(TP=ifelse(albu28=="inh" & IC=="inh",1,0),
@@ -3106,8 +3106,8 @@ rename(`Corresponding Cp`=l,`Maximal Youden index`=k) %>% kable()
 
 #Defining functions to calculate sensitivity and specificity
 tgsen<-function(Ct) {toxo %>%
-    filter(Matrix=="Liquide céphalo-rachidien (LCR)" | 
-           Info_patient=="Liquide céphalo-rachidien (LCR)") %>%
+    filter(Matrix=="Liquide cÃ©phalo-rachidien (LCR)" | 
+           Info_patient=="Liquide cÃ©phalo-rachidien (LCR)") %>%
     mutate(IC=ifelse(CrossingPoint_F.x>38 & CrossingPoint_G.x>38,"inh","ok"),
            albu28=ifelse(CrossingPoint_H.x>=Ct,"inh","ok"))%>%
      mutate(TP=ifelse(albu28=="inh" & IC=="inh",1,0),
@@ -3126,8 +3126,8 @@ tgsen<-function(Ct) {toxo %>%
 }
 
 tgspe<-function(Ct) {toxo %>%
-    filter(Matrix=="Liquide céphalo-rachidien (LCR)" | 
-           Info_patient=="Liquide céphalo-rachidien (LCR)") %>%
+    filter(Matrix=="Liquide cÃ©phalo-rachidien (LCR)" | 
+           Info_patient=="Liquide cÃ©phalo-rachidien (LCR)") %>%
     mutate(IC=ifelse(CrossingPoint_F.x>38 & CrossingPoint_G.x>38,"inh","ok"),
            albu28=ifelse(CrossingPoint_H.x>=Ct,"inh","ok"))%>%
      mutate(TP=ifelse(albu28=="inh" & IC=="inh",1,0),
@@ -3361,7 +3361,7 @@ cor.test(x=toxo3$WBC,y=toxo3$CrossingPoint_H.x,alternative="less",method="spearm
 
 ```{r setup_pj, include=FALSE}
 #Loading datset of Pneumocystis PCR 
-inhpj<-read.csv(file="E:/inhib/data R/PjLC_R.csv",sep=";",header=T,dec=".")
+inhpj<-read.csv(file="?",sep=";",header=T,dec=".")
 
 #Cleaning and tidying the dataset of Pneumocystis PCR
 inhpj %>%
@@ -3394,7 +3394,7 @@ inhpj %>%
          PlateName=paste(Experiment.Name,Analysis.Name,sep="_")) %>%
   select(Experiment.Name,Analysis.Name,SampleName,SampleName_m,Expe_Analysis_Name,
          Expe_Analysis_Name_m,PlateName,Position,CrossingPoint,StatusCodes)-> inhpj2
-#The message "Warning: 246 parsing failures." has no impact on data cleaning because it only concerned rows of negative controls (named "T Négatif") substituted by "plate_control"
+#The message "Warning: 246 parsing failures." has no impact on data cleaning because it only concerned rows of negative controls (named "T NÃ©gatif") substituted by "plate_control"
 
 
 
@@ -3462,7 +3462,7 @@ dplyr::union(nd,dsd) %>% full_join(ddd,by="SampleName_m")-> inhpj4
 
 
 #Loading dataset of bioclinical informations for PCR P jiroveci results
-dxpj<-read.csv(file="E:/inhib/data R/PjDxLab_R.csv",sep=";",header=T,dec=".")
+dxpj<-read.csv(file="?",sep=";",header=T,dec=".")
 
 #Cleaning, tidying the dataset of bioclinical informations for PCR P jiroveci results
 #and creating a column "SampleName_m" for fusion with dataset of PCR P jiroveci
@@ -3475,7 +3475,7 @@ dxpj %>% unite(Date_creation,Date_creation,Heure_creation,sep=" ") %>%
   transform(SampleName_m=as.character(SampleName_m))-> dxpj
 
 #Joining the datasets and removing sporadic misapparing
-#If we perform full_join, PCR saved in DXLab, but not performed owing to "non conformités", informatical assays on DXLab are included "pj" dataset
+#If we perform full_join, PCR saved in DXLab, but not performed owing to "non conformitÃ©s", informatical assays on DXLab are included "pj" dataset
 dplyr::left_join(inhpj4,dxpj,by="SampleName_m") -> pj
 
 knitr::opts_chunk$set(echo = F)
@@ -3681,9 +3681,9 @@ Inhibited samples were defined by difference between inhibition control Cp and p
 
 ```{r pj_matrix2}
 pj%>%
-  mutate(BAL=ifelse(Matrix=="Liquide de lavage bronchiolo-alvéolaire",1,0),
-         BA=ifelse(Matrix=="Produit d'aspiration bronchique" & Info_patient!="Prélèvement nasal",1,0),
-         nose=ifelse(Info_patient=="Prélèvement nasal",1,0),
+  mutate(BAL=ifelse(Matrix=="Liquide de lavage bronchiolo-alvÃ©olaire",1,0),
+         BA=ifelse(Matrix=="Produit d'aspiration bronchique" & Info_patient!="PrÃ©lÃ¨vement nasal",1,0),
+         nose=ifelse(Info_patient=="PrÃ©lÃ¨vement nasal",1,0),
          sputum=ifelse(Matrix=="Produit d'expectoration",1,0)) %>%
   dplyr::summarise(total=n(),
                    BAL=sum(BAL),
@@ -3692,9 +3692,9 @@ pj%>%
                    Sputum=sum(sputum)) %>% kable()
 
 pj%>%
-  mutate(BAL=ifelse(Matrix=="Liquide de lavage bronchiolo-alvéolaire",1,0),
-         BA=ifelse(Matrix=="Produit d'aspiration bronchique" & Info_patient!="Prélèvement nasal",1,0),
-         nose=ifelse(Info_patient=="Prélèvement nasal",1,0),
+  mutate(BAL=ifelse(Matrix=="Liquide de lavage bronchiolo-alvÃ©olaire",1,0),
+         BA=ifelse(Matrix=="Produit d'aspiration bronchique" & Info_patient!="PrÃ©lÃ¨vement nasal",1,0),
+         nose=ifelse(Info_patient=="PrÃ©lÃ¨vement nasal",1,0),
          sputum=ifelse(Matrix=="Produit d'expectoration",1,0),
          inh=ifelse(CrossingPoint_G.x-CrossingPoint_PC.x>=3,"inhibited","not inh")) %>%
   group_by(inh) %>%
@@ -3716,10 +3716,10 @@ The numbers of the following table were based on the interpretation communicated
 pj %>%
   filter(!is.na(Matrix)) %>%
   filter(str_detect(Matrix,"expectoration")) %>%
-  mutate(Pos_result= ifelse(str_detect(Conclusion,"Présence")|
-                              str_detect(Conclusion,"pneumopathie à P.jiroveci"),1,0),
+  mutate(Pos_result= ifelse(str_detect(Conclusion,"PrÃ©sence")|
+                              str_detect(Conclusion,"pneumopathie Ã  P.jiroveci"),1,0),
          Neg_result= ifelse(str_detect(Conclusion,"Absence")|
-                              str_detect(Conclusion,"négatif")|
+                              str_detect(Conclusion,"nÃ©gatif")|
                               str_detect(Conclusion,"acellulaire"),1,0)) %>%
   summarise(Matrix="sputum",
             N_pos=sum(Pos_result),
@@ -3729,10 +3729,10 @@ pj %>%
 pj %>%
   filter(!is.na(Matrix)) %>%
   filter(str_detect(Matrix,"bronchiolo")) %>%
-  mutate(Pos_result= ifelse(str_detect(Conclusion,"Présence")|
-                              str_detect(Conclusion,"pneumopathie à P.jiroveci"),1,0),
+  mutate(Pos_result= ifelse(str_detect(Conclusion,"PrÃ©sence")|
+                              str_detect(Conclusion,"pneumopathie Ã  P.jiroveci"),1,0),
          Neg_result= ifelse(str_detect(Conclusion,"Absence")|
-                              str_detect(Conclusion,"négatif")|
+                              str_detect(Conclusion,"nÃ©gatif")|
                               str_detect(Conclusion,"acellulaire"),1,0)) %>%
   summarise(Matrix="BAL",
             N_pos=sum(Pos_result),
@@ -3743,11 +3743,11 @@ bind_rows(t01,t02) -> t01
 pj %>%
   filter(!is.na(Matrix)) %>%
   filter(str_detect(Matrix,"aspiration") &
-           Info_patient!="Prélèvement nasal") %>%
-   mutate(Pos_result= ifelse(str_detect(Conclusion,"Présence")|
-                              str_detect(Conclusion,"pneumopathie à P.jiroveci"),1,0),
+           Info_patient!="PrÃ©lÃ¨vement nasal") %>%
+   mutate(Pos_result= ifelse(str_detect(Conclusion,"PrÃ©sence")|
+                              str_detect(Conclusion,"pneumopathie Ã  P.jiroveci"),1,0),
   Neg_result= ifelse(str_detect(Conclusion,"Absence")|
-                              str_detect(Conclusion,"négatif")|
+                              str_detect(Conclusion,"nÃ©gatif")|
                               str_detect(Conclusion,"acellulaire"),1,0)) %>%
   summarise(Matrix="bronchoaspiration",
             N_pos=sum(Pos_result),
@@ -3758,11 +3758,11 @@ bind_rows(t01,t02) -> t01
 pj %>%
   filter(!is.na(Matrix)) %>%
   filter(str_detect(Matrix,"aspiration") &
-           Info_patient=="Prélèvement nasal") %>%
-  mutate(Pos_result= ifelse(str_detect(Conclusion,"Présence")|
-                              str_detect(Conclusion,"pneumopathie à P.jiroveci"),1,0),
+           Info_patient=="PrÃ©lÃ¨vement nasal") %>%
+  mutate(Pos_result= ifelse(str_detect(Conclusion,"PrÃ©sence")|
+                              str_detect(Conclusion,"pneumopathie Ã  P.jiroveci"),1,0),
          Neg_result= ifelse(str_detect(Conclusion,"Absence")|
-                              str_detect(Conclusion,"négatif")|
+                              str_detect(Conclusion,"nÃ©gatif")|
                               str_detect(Conclusion,"acellulaire"),1,0)) %>%
   summarise(Matrix="nasal swab",
             N_pos=sum(Pos_result),
@@ -3782,7 +3782,7 @@ We neglected cellularity criterias because only one paucicellular BAL (*i.e.* ex
 
 pj %>%
   filter(!is.na(Matrix) & CrossingPoint_H.x<45) %>%
-  filter(str_detect(Matrix,"alvéolaire")) %>% 
+  filter(str_detect(Matrix,"alvÃ©olaire")) %>% 
    summarise(Matrix="BAL",
             N=n(),
             `Mean Cp alb`=mean(CrossingPoint_H.x),
@@ -3794,7 +3794,7 @@ pj %>%
 pj %>%
   filter(!is.na(Matrix) & CrossingPoint_H.x<45) %>%
   filter(str_detect(Matrix,"aspiration") &
-           Info_patient!="Prélèvement nasal") %>% 
+           Info_patient!="PrÃ©lÃ¨vement nasal") %>% 
   summarise(Matrix="bronchoaspiration",
             N=n(),
             `Mean Cp alb`=mean(CrossingPoint_H.x),
@@ -3817,7 +3817,7 @@ bind_rows(t01,t02) -> t01
 pj %>%
   filter(!is.na(Matrix) & CrossingPoint_H.x<45) %>%
   filter(str_detect(Matrix,"aspiration") &
-           Info_patient=="Prélèvement nasal") %>% 
+           Info_patient=="PrÃ©lÃ¨vement nasal") %>% 
   summarise(Matrix="nasal swab",
             N=n(),
             `Mean Cp alb`=mean(CrossingPoint_H.x),
@@ -4025,9 +4025,9 @@ Samples analyzed twice corresponded to **`r pj%>%filter(!is.na(Experiment.Name.y
 ```{r pj_twice_matrix}
 pj%>%
   filter(!is.na(Experiment.Name.y) & !is.na(Matrix)) %>%
-mutate(BAL=ifelse(Matrix=="Liquide de lavage bronchiolo-alvéolaire",1,0),
-       BA=ifelse(Matrix=="Produit d'aspiration bronchique" & Info_patient!="Prélèvement nasal",1,0),
-       nose=ifelse(Info_patient=="Prélèvement nasal",1,0),
+mutate(BAL=ifelse(Matrix=="Liquide de lavage bronchiolo-alvÃ©olaire",1,0),
+       BA=ifelse(Matrix=="Produit d'aspiration bronchique" & Info_patient!="PrÃ©lÃ¨vement nasal",1,0),
+       nose=ifelse(Info_patient=="PrÃ©lÃ¨vement nasal",1,0),
        sputum=ifelse(Matrix=="Produit d'expectoration",1,0)) %>%
   dplyr::summarise(` `="Analyzed twice",
                    total=n(),
@@ -4038,9 +4038,9 @@ mutate(BAL=ifelse(Matrix=="Liquide de lavage bronchiolo-alvéolaire",1,0),
 
 pj%>%
   filter(!is.na(Matrix)) %>%
-  mutate(BAL=ifelse(Matrix=="Liquide de lavage bronchiolo-alvéolaire",1,0),
-         BA=ifelse(Matrix=="Produit d'aspiration bronchique" & Info_patient!="Prélèvement nasal",1,0),
-         nose=ifelse(Info_patient=="Prélèvement nasal",1,0),
+  mutate(BAL=ifelse(Matrix=="Liquide de lavage bronchiolo-alvÃ©olaire",1,0),
+         BA=ifelse(Matrix=="Produit d'aspiration bronchique" & Info_patient!="PrÃ©lÃ¨vement nasal",1,0),
+         nose=ifelse(Info_patient=="PrÃ©lÃ¨vement nasal",1,0),
          sputum=ifelse(Matrix=="Produit d'expectoration",1,0)) %>%
   dplyr::summarise(` `="All samples",
                    total=n(),
@@ -4095,10 +4095,10 @@ A non valid inhibition control (IC) was defined by a difference of Cp between th
 ```{r pj_twice_args_matrix}
 pj %>%
   filter(!is.na(Experiment.Name.y)) %>%
-  mutate(m_class=ifelse(Matrix=="Liquide de lavage bronchiolo-alvéolaire","BAL","other")) %>%
+  mutate(m_class=ifelse(Matrix=="Liquide de lavage bronchiolo-alvÃ©olaire","BAL","other")) %>%
   transform(m_class=ifelse(Matrix=="Produit d'aspiration bronchique" & 
-                             Info_patient!="Prélèvement nasal","BA",m_class)) %>%
-  transform(m_class=ifelse(Info_patient=="Prélèvement nasal","nose",m_class)) %>%
+                             Info_patient!="PrÃ©lÃ¨vement nasal","BA",m_class)) %>%
+  transform(m_class=ifelse(Info_patient=="PrÃ©lÃ¨vement nasal","nose",m_class)) %>%
   transform(m_class=ifelse(Matrix=="Produit d'expectoration","sputum",m_class)) %>%
   mutate(Ficklypos=ifelse(CrossingPoint_A.x<54 | CrossingPoint_B.x<54,1,0)) %>%
   mutate(TIPCsup_alone=ifelse(CrossingPoint_G.x-CrossingPoint_PC.x>=3 &
@@ -4524,7 +4524,7 @@ bind_rows(sen,spe) %>%
 ```{r pj_bal}
 
 pjy<-function(Ct) {pj %>%
-    filter(Matrix=="Liquide de lavage bronchiolo-alvéolaire") %>%
+    filter(Matrix=="Liquide de lavage bronchiolo-alvÃ©olaire") %>%
     mutate(IC=ifelse(CrossingPoint_G.x-CrossingPoint_PC.x>=3,"inh","ok"),
            albu28=ifelse(CrossingPoint_H.x>=Ct,"inh","ok")) %>%
     mutate(TP=ifelse(albu28=="inh" & IC=="inh",1,0),
@@ -4561,7 +4561,7 @@ ggplot()+
   ggtitle(mytitle)
 
 pjsen<-function(Ct) {pj %>%
-    filter(Matrix=="Liquide de lavage bronchiolo-alvéolaire") %>%
+    filter(Matrix=="Liquide de lavage bronchiolo-alvÃ©olaire") %>%
     mutate(IC=ifelse(CrossingPoint_G.x-CrossingPoint_PC.x>=3,"inh","ok"),
            albu28=ifelse(CrossingPoint_H.x>=Ct,"inh","ok")) %>%
     mutate(class=ifelse(albu28=="inh" & IC=="inh","TP","other")) %>%
@@ -4574,7 +4574,7 @@ pjsen<-function(Ct) {pj %>%
   if ("TP" %in% colnames(cval)) {cval$TP/(cval$FN+cval$TP)} else {0}}
 
 pjspe<-function(Ct) {pj %>%
-    filter(Matrix=="Liquide de lavage bronchiolo-alvéolaire") %>%
+    filter(Matrix=="Liquide de lavage bronchiolo-alvÃ©olaire") %>%
     mutate(IC=ifelse(CrossingPoint_G.x-CrossingPoint_PC.x>=3,"inh","ok"),
            albu28=ifelse(CrossingPoint_H.x>=Ct,"inh","ok")) %>%
     mutate(class=ifelse(albu28=="inh" & IC=="inh","TP","other")) %>%
@@ -4637,7 +4637,7 @@ bind_rows(sen,spe) %>%
 ```{r pj_brochoasp}
 pjy<-function(Ct) {pj %>%
     filter(Matrix=="Produit d'aspiration bronchique" &
-             Info_patient!="Prélèvement nasal") %>%
+             Info_patient!="PrÃ©lÃ¨vement nasal") %>%
     mutate(IC=ifelse(CrossingPoint_G.x-CrossingPoint_PC.x>=3,"inh","ok"),
            albu28=ifelse(CrossingPoint_H.x>=Ct,"inh","ok")) %>%
     mutate(TP=ifelse(albu28=="inh" & IC=="inh",1,0),
@@ -4674,7 +4674,7 @@ ggplot()+
 
   pjsen<-function(Ct) {pj %>%
       filter(Matrix=="Produit d'aspiration bronchique" &
-               Info_patient!="Prélèvement nasal") %>%
+               Info_patient!="PrÃ©lÃ¨vement nasal") %>%
       mutate(IC=ifelse(CrossingPoint_G.x-CrossingPoint_PC.x>=3,"inh","ok"),
              albu28=ifelse(CrossingPoint_H.x>=Ct,"inh","ok")) %>%
       mutate(TP=ifelse(albu28=="inh" & IC=="inh",1,0),
@@ -4691,7 +4691,7 @@ ggplot()+
 
 pjspe<-function(Ct) {pj %>%
     filter(Matrix=="Produit d'aspiration bronchique" &
-             Info_patient!="Prélèvement nasal") %>%
+             Info_patient!="PrÃ©lÃ¨vement nasal") %>%
     mutate(IC=ifelse(CrossingPoint_G.x-CrossingPoint_PC.x>=3,"inh","ok"),
            albu28=ifelse(CrossingPoint_H.x>=Ct,"inh","ok")) %>%
     mutate(TP=ifelse(albu28=="inh" & IC=="inh",1,0),
@@ -4964,11 +4964,11 @@ pj %>%
 
 
 toxo %>%
-  filter(Matrix=="Liquide de lavage bronchiolo-alvéolaire") %>%
+  filter(Matrix=="Liquide de lavage bronchiolo-alvÃ©olaire") %>%
   select(1,5,115,124,Num_travail) %>%
   mutate(ID=paste(IEP,"_",Date_sampling)) -> crossA
 pj %>%
-  filter(Matrix=="Liquide de lavage bronchiolo-alvéolaire") %>%
+  filter(Matrix=="Liquide de lavage bronchiolo-alvÃ©olaire") %>%
   select(1,3,55,64) %>%
   mutate(ID=paste(IEP,"_",Date_sampling)) -> crossB
 inner_join(crossA,crossB,by="ID") %>% 
@@ -5058,10 +5058,10 @@ to construct a Venn diagram instead.
 toxo %>%
   mutate (pauci=ifelse
           (Matrix %in% c("Liquide amniotique",
-                         "Liquide céphalo-rachidien (LCR)",
+                         "Liquide cÃ©phalo-rachidien (LCR)",
                          "Humeur aqueuse")|
               Info_patient %in% c("Liquide d'ascite",
-                                  "Liquide péricardique",
+                                  "Liquide pÃ©ricardique",
                                   "Liquide pleural")|
               Num_travail %in% c(99163222723,99162523175,
                                  99162503057,99161381971,99160961446)| 
@@ -5072,7 +5072,7 @@ toxo %>%
 #Selection of blood samples and classification as paucicellular or not
 #Blood samples with associated full blood count
 #Loading full blood counts
-fbctox<-read.csv(file="E:/inhib/data R/toxo_FBC_DxLab_R.csv",sep=";",header=T,dec=".")
+fbctox<-read.csv(file="?",sep=";",header=T,dec=".")
 
 #Creating a column for merging dataframes
 fbctox %>%
@@ -5096,7 +5096,7 @@ toxo %>%
 
 #Blood samples without WBC
 #Loading classification as paucicellular or not
-cyt_man<-read.csv(file="E:/inhib/PCR toxo sans cytologies associees (1).csv",sep=";",header=T,dec=".")
+cyt_man<-read.csv(file="?",sep=";",header=T,dec=".")
 
 #Selection, merging and classification as paucicellular
 toxo %>%
@@ -5136,7 +5136,7 @@ toxo_p %>%
   mutate(orph_bal=ifelse(Num_travail %in% c(99162523175,
                                             99162503057,
                                             99161381971,99160961446),1,0),
-         all_bal=ifelse(str_detect(Matrix,"alvéolaire"),1,0)) %>%
+         all_bal=ifelse(str_detect(Matrix,"alvÃ©olaire"),1,0)) %>%
   filter(orph_bal+all_bal==2 | orph_bal+all_bal==0) %>%
   mutate(IC=ifelse(CrossingPoint_F.x >38 &
                     CrossingPoint_G.x >38, "inh","N" ),
@@ -5145,11 +5145,11 @@ toxo_p %>%
          AF=ifelse(str_detect(Matrix,"Liquide amniotique"),1,0),
          CSF=ifelse(str_detect(Matrix,"LCR")|
                       str_detect(Info_patient,"LCR"),1,0),
-         BAL=ifelse(str_detect(Matrix,"bronchiolo-alvéolaire"),1,0),
+         BAL=ifelse(str_detect(Matrix,"bronchiolo-alvÃ©olaire"),1,0),
          plac=ifelse(str_detect(Matrix,"Placenta"),1,0),
          cord=ifelse(str_detect(Matrix,"cordon"),1,0),
          AH=ifelse(str_detect(Matrix,"Humeur aqueuse") &
-                     Info_patient!="Liquide céphalo-rachidien (LCR)"|
+                     Info_patient!="Liquide cÃ©phalo-rachidien (LCR)"|
                      SampleName.x== "153 0868 HA",1,0),
          bld=ifelse(str_detect(Matrix,"Sang veineux")&
                       Info_patient %in% c("N/A","Humeur aqueuse") &
@@ -5241,7 +5241,7 @@ int %>%
 bind_rows(t01,t02) -> t01
 int %>%
   filter(str_detect(Info_patient,"ganglionnaire")|
-           str_detect(Info_patient,"adénopathie")) %>%
+           str_detect(Info_patient,"adÃ©nopathie")) %>%
   mutate(alb_inh=ifelse(CrossingPoint_H.x>th_misc,1,0)) %>%
   group_by(IC) %>%
   summarise(Matrix_type= "lymph node",
@@ -5250,7 +5250,7 @@ int %>%
             alb_Cp_Thr=th_misc) -> t02
 bind_rows(t01,t02) -> t01
 int %>%
-  filter(str_detect(Info_patient,"rétinienne")) %>%
+  filter(str_detect(Info_patient,"rÃ©tinienne")) %>%
   mutate(alb_inh=ifelse(CrossingPoint_H.x>th_misc,1,0)) %>%
   group_by(IC) %>%
   summarise(Matrix_type= "retina",
@@ -5259,7 +5259,7 @@ int %>%
             alb_Cp_Thr=th_misc) -> t02
 bind_rows(t01,t02) -> t01
 int %>%
-  filter(str_detect(Info_patient,"cérébra")) %>%
+  filter(str_detect(Info_patient,"cÃ©rÃ©bra")) %>%
   mutate(alb_inh=ifelse(CrossingPoint_H.x>th_misc,1,0)) %>%
   group_by(IC) %>%
   summarise(Matrix_type= "cerebral biopsy",
@@ -5268,7 +5268,7 @@ int %>%
             alb_Cp_Thr=th_misc) -> t02
 bind_rows(t01,t02) -> t01
 int %>%
-  filter(str_detect(Info_patient,"hépatique")) %>%
+  filter(str_detect(Info_patient,"hÃ©patique")) %>%
   mutate(alb_inh=ifelse(CrossingPoint_H.x>th_misc,1,0)) %>%
   group_by(IC) %>%
   summarise(Matrix_type= "liver biosy",
@@ -5277,7 +5277,7 @@ int %>%
             alb_Cp_Thr=th_misc) -> t02
 bind_rows(t01,t02) -> t01
 int %>%
-  filter(str_detect(Info_patient,"péricardique")) %>%
+  filter(str_detect(Info_patient,"pÃ©ricardique")) %>%
   mutate(alb_inh=ifelse(CrossingPoint_H.x>th_misc,1,0)) %>%
   group_by(IC) %>%
   summarise(Matrix_type= "heart biopsy",
@@ -5335,7 +5335,7 @@ th_bro <- 22.1
 th_spu <- 23.9
 
 #Selection of the list of shared BAL between Tg and Pj PCR in order to exclude them
-toxo %>% filter(str_detect(Matrix,"bronchiolo-alvéolaire")) %>%
+toxo %>% filter(str_detect(Matrix,"bronchiolo-alvÃ©olaire")) %>%
   mutate(shared=1) %>%
   select(Num_travail,shared) ->tbal
 
@@ -5343,10 +5343,10 @@ toxo %>% filter(str_detect(Matrix,"bronchiolo-alvéolaire")) %>%
 left_join(pj,tbal) %>% 
   filter(is.na(shared)) %>%
   mutate(IC=ifelse(CrossingPoint_G.x - CrossingPoint_PC.x >3,"inh","N"),
-         BAL=ifelse(str_detect(Matrix,"bronchiolo-alvéolaire") |
+         BAL=ifelse(str_detect(Matrix,"bronchiolo-alvÃ©olaire") |
                     str_detect(Info_patient,"nasal"),1,0),
          broncho=ifelse(str_detect(Matrix,"aspiration") & 
-                          Info_patient!="Prélèvement nasal",1,0),
+                          Info_patient!="PrÃ©lÃ¨vement nasal",1,0),
          sputum=ifelse(str_detect(Matrix,"expectoration"),1,0)) %>%
   mutate(iBAL=ifelse(BAL==1 & CrossingPoint_H.x >th_BAL,1,0),
          ibro=ifelse(broncho==1 & CrossingPoint_H.x >th_bro,1,0),
@@ -5392,7 +5392,7 @@ t01 %>%
 ```{r venn_inter_table}
 #Pneumocystis PCR concerning samples analyzed in both PCR
 th_BAL <- 24.7
-toxo %>% filter(str_detect(Matrix,"bronchiolo-alvéolaire")) %>%
+toxo %>% filter(str_detect(Matrix,"bronchiolo-alvÃ©olaire")) %>%
   mutate(shared=1) %>%
   select(Num_travail,shared) ->tbal
 
@@ -5400,7 +5400,7 @@ toxo %>% filter(str_detect(Matrix,"bronchiolo-alvéolaire")) %>%
 left_join(pj,tbal) %>% 
   filter(!is.na(shared)) %>%
   mutate(IC=ifelse(CrossingPoint_G.x - CrossingPoint_PC.x >3,"inh","N"),
-         BAL=ifelse(str_detect(Matrix,"bronchiolo-alvéolaire") |
+         BAL=ifelse(str_detect(Matrix,"bronchiolo-alvÃ©olaire") |
                     str_detect(Info_patient,"nasal"),1,0)) %>%
   mutate(iBAL=ifelse(BAL==1 & CrossingPoint_H.x >th_BAL,1,0),
          nBAL=ifelse(BAL==1 & CrossingPoint_H.x <=th_BAL,1,0)) %>%
@@ -5414,7 +5414,7 @@ left_join(pj,tbal) %>%
 left_join(pj,tbal) %>%
   filter(!is.na(shared)) %>%
   mutate(IC=ifelse(CrossingPoint_G.x - CrossingPoint_PC.x >3,"inh","N"),
-         BAL=ifelse(str_detect(Matrix,"bronchiolo-alvéolaire") |
+         BAL=ifelse(str_detect(Matrix,"bronchiolo-alvÃ©olaire") |
                       str_detect(Info_patient,"nasal"),1,0)) %>%
   filter(BAL==1 & CrossingPoint_H.x >th_BAL) %>%
   select(Num_travail,Matrix,CrossingPoint_G.x
@@ -5428,7 +5428,7 @@ th_BAL <- 29.9
 toxo %>%
   mutate(orph_bal=ifelse(Num_travail %in% c(99162523175,99162503057,
                                             99161381971,99160961446),1,0)) %>%
-  filter(orph_bal==0 & str_detect(Matrix,"bronchiolo-alvéolaire")) %>%
+  filter(orph_bal==0 & str_detect(Matrix,"bronchiolo-alvÃ©olaire")) %>%
   mutate(IC=ifelse(CrossingPoint_F.x >38 & CrossingPoint_G.x >38,"inh","N"),
          iBAL=ifelse(CrossingPoint_H.x >th_BAL,1,0),
          nBAL=ifelse(CrossingPoint_H.x <=th_BAL,1,0)) %>%
@@ -5441,7 +5441,7 @@ toxo %>%
 toxo %>%
   mutate(orph_bal=ifelse(Num_travail %in% c(99162523175,99162503057,
                                             99161381971,99160961446),1,0)) %>%
-  filter(orph_bal==0 & str_detect(Matrix,"bronchiolo-alvéolaire")) %>%
+  filter(orph_bal==0 & str_detect(Matrix,"bronchiolo-alvÃ©olaire")) %>%
   mutate(IC=ifelse(CrossingPoint_F.x >38 & CrossingPoint_G.x >38,"inh","N"),
          iBAL=ifelse(CrossingPoint_H.x >th_BAL,1,0),
          nBAL=ifelse(CrossingPoint_H.x <=th_BAL,1,0)) %>%
